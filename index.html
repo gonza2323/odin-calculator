@@ -13,34 +13,34 @@
         <div class="display">test</div>
         <div class="keypad">
             <div class="row">
-                <button class="special">AC</button>
-                <button class="special">CE</button>
-                <button class="special">%</button>
-                <button class="operation">÷</button>
+                <button class="special" id="ac">AC</button>
+                <button class="special" id="ce">CE</button>
+                <button class="special" data-op="mod">%</button>
+                <button class="operation" data-op="div">÷</button>
             </div>
             <div class="row">
                 <button class="number">7</button>
                 <button class="number">8</button>
                 <button class="number">9</button>
-                <button class="operation">×</button>
+                <button class="operation" data-op="mult">×</button>
             </div>
             <div class="row">
                 <button class="number">4</button>
                 <button class="number">5</button>
-                <button class="number">-</button>
-                <button class="operation">6</button>
+                <button class="number">6</button>
+                <button class="operation" data-op="sub">-</button>
             </div>
             <div class="row">
                 <button class="number">1</button>
                 <button class="number">2</button>
                 <button class="number">3</button>
-                <button class="operation">+</button>
+                <button class="operation" data-op="add">+</button>
             </div>
-            <!-- <div class="row">
-                <button class="number zero">0</button>
+            <div class="row">
+                <button class="number" id="zero">0</button>
                 <button class="number">.</button>
-                <button class="operation">=</button>
-            </div> -->
+                <button class="operation" data-op="equal">=</button>
+            </div>
         </div>
     </div>
 </body>
