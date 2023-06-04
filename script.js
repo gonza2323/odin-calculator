@@ -87,4 +87,9 @@ operationButtons.forEach(opButton => {
 clearButton.addEventListener('click', clearDisplay);
 restartButton.addEventListener('click', restart);
 
+window.addEventListener('keydown', e => {
+    const button = document.querySelector(`[data-key="${e.key}"]`);
+    if (button) button.click();
+})
+
 restart();
