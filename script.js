@@ -33,7 +33,7 @@ const operations = {
     },
 
     equal(a, b) {
-        return a;
+        return b;
     },
 }
 
@@ -78,7 +78,7 @@ operationButtons.forEach(opButton => {
         const result = currentOp(numberA, numberB);
         currentOp = operations[e.target.getAttribute('data-op')];
         numberA = result;
-        numberB = null;
+        numberB = result;
         display.textContent = result.toString() + currentOp.symbol;
         displayShouldClear = true;
     })
