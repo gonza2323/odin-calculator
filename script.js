@@ -157,6 +157,9 @@ function onButtonPress(event) {
 function onKeyPressDown(event) {
     const key = event.key;
     const button = document.querySelector(`button[data-key="${key}"]`)
+
+    if (!button) return;
+
     button.classList.add("active");
     button.click();
     
@@ -165,7 +168,10 @@ function onKeyPressDown(event) {
 
 function onKeyPressUp(event) {
     const key = event.key;
-    const button = document.querySelector(`button[data-key="${key}"]`)
+    const button = document.querySelector(`button[data-key="${key}"]`);
+
+    if (!button) return;
+
     button.classList.remove("active");
 }
 
