@@ -68,6 +68,7 @@ body {
     font-weight: 500;
     background-color: rgb(1, 1, 1);
     border: solid rgb(224, 224, 224) 1px;
+    border-bottom: none;
     transition: background-color 0.1s ease;
 }
 
@@ -108,8 +109,4 @@ body {
 
 .key:first-child {
     border-left:none
-}
-
-.number-row:last-child .key {
-    border-bottom: none;
 }
