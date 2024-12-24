@@ -9,7 +9,7 @@ html {
 body {
     margin: 0;
     height: 100%;
-    background-color: black;
+    background-color: rgb(34, 34, 34);
     
     display: flex;
     justify-content: center;
@@ -19,8 +19,7 @@ body {
 .calculator {
     background-color: black;
     padding: 8px;
-    border: white solid 2px;
-    border-radius: 8px;
+    border: rgb(224, 224, 224) solid 2px;
     width: 400px;
     height: 500px;
 
@@ -29,13 +28,23 @@ body {
     gap: 8px;
 }
 
+.display-container {
+    height: 82px;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
 .display {
-    height: 80px;
-    color: white;
+    color: rgb(224, 224, 224);
     text-align: right;
     font-size: 48px;
+    font-family: sans-serif;
 
-    background-color: black;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 4px;
 }
 
 .keypad {
@@ -51,4 +60,56 @@ body {
 
 .key {
     flex: 1;
+    border: none;
+    font-size: 32px;
+    padding: 0;
+    margin: 0;
+    color: rgb(224, 224, 224);
+    font-weight: 500;
+    background-color: rgb(1, 1, 1);
+    border: solid rgb(224, 224, 224) 1px;
+    transition: background-color 0.1s ease;
+}
+
+.key:hover, .key:focus-visible {
+    background-color: rgb(53, 53, 53);
+    outline: none;
+}
+  
+.key:active {
+    background-color: rgb(27, 27, 27);
+}
+
+.key.red {
+    color: white;
+    background-color: rgb(255, 101, 101);
+}
+
+.key.red:hover, .key.red:focus-visible {
+    background-color: rgb(255, 125, 125);
+    outline: none;
+}
+
+.key.red:active {
+    background-color: rgb(231, 77, 77);
+}
+
+.key.half-width {
+    flex: 0 0 50%;
+}
+
+.key.quarter-width {
+    flex: 0 0 25%;
+}
+
+.key:last-child {
+    border-right: none;
+}
+
+.key:first-child {
+    border-left:none
+}
+
+.number-row:last-child .key {
+    border-bottom: none;
 }
