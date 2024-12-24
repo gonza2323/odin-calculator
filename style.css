@@ -77,7 +77,7 @@ body {
     outline: none;
 }
   
-.key:active {
+.key:active, .active {
     background-color: rgb(27, 27, 27);
 }
 
@@ -91,7 +91,7 @@ body {
     outline: none;
 }
 
-.key.red:active {
+.key.red:active, .active.red {
     background-color: rgb(231, 77, 77);
 }
 

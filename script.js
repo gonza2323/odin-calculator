@@ -154,5 +154,22 @@ function onButtonPress(event) {
     }
 }
 
+function onKeyPressDown(event) {
+    const key = event.key;
+    const button = document.querySelector(`button[data-key="${key}"]`)
+    button.classList.add("active");
+    button.click();
+    
+    if (key === '/') event.preventDefault();
+}
+
+function onKeyPressUp(event) {
+    const key = event.key;
+    const button = document.querySelector(`button[data-key="${key}"]`)
+    button.classList.remove("active");
+}
+
 
 keypad.addEventListener("click", onButtonPress);
+window.addEventListener("keydown", onKeyPressDown);
+window.addEventListener("keyup", onKeyPressUp);
