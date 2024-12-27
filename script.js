@@ -49,7 +49,6 @@ let operandB;
 let currentOperation;
 let previousOperation;
 let currentState;
-let displayShouldClear;
 
 
 function clearAll() {
@@ -57,7 +56,6 @@ function clearAll() {
     operandB = null;
     currentOperation = null;
     previousOperation = null;
-    displayShouldClear = false;
     currentState = states.INPUT_OPERAND;
     clearEntry();
 }
@@ -66,11 +64,14 @@ function numericInput(input) {
     switch (currentState) {
         case states.RESULT:
             clearAll();
+            break;
         case states.INPUT_OPERATION:
             clearEntry();
-            currentState = states.INPUT_OPERAND;
+            break;
     }
     
+    currentState = states.INPUT_OPERAND;
+        
     switch (input) {
         case "clear-entry":
             clearEntry();
@@ -106,7 +107,6 @@ function inputOperation(operation) {
 
     currentOperation = operation;
     display.textContent += operation.symbol;
-    displayShouldClear = true;
 }
 
 function equal() {
@@ -126,7 +126,6 @@ function equal() {
     }
         
     currentOperation = null;
-    displayShouldClear = true;
     currentState = states.RESULT;
 }
 
