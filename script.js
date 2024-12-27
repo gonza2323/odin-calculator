@@ -46,6 +46,7 @@ const states = {
     INPUT_OPERAND: 0,
     INPUT_OPERATION: 1,
     RESULT: 2,
+    ERROR: 3,
 }
 
 
@@ -68,6 +69,7 @@ function clearAll() {
 
 function numericInput(input) {
     switch (currentState) {
+        case states.ERROR:
         case states.RESULT:
             clearAll();
             break;
@@ -104,12 +106,15 @@ function inputOperation(operation) {
         case states.RESULT:
             if (currentOperation) {
                 operandB = readNumberFromDisplay();
-                operate(currentOperation);
+                const success = operate(currentOperation);
+                if (!success) return throwError();
             } else {
                 operandA = readNumberFromDisplay();
             }
             currentState = states.INPUT_OPERATION;
             break;
+        case states.ERROR:
+            return;
     }
 
     currentOperation = operation;
@@ -123,14 +128,18 @@ function equal() {
             writeNumberToDisplay(operandA);
             break;
         case states.INPUT_OPERAND:
-            operandB = readNumberFromDisplay()
+            operandB = readNumberFromDisplay();
         case states.RESULT:
             const operation = currentOperation || previousOperation;
             if (operandB === null)
                 operandB = readNumberFromDisplay();
 
-            operate(operation);
+            const success = operate(operation);
+            if (!success) return throwError();
+
             break;
+        case states.ERROR:
+            return;
     }
 
     currentOperation = null;
@@ -143,6 +152,15 @@ function operate(operation) {
     operandA = result;
     writeNumberToDisplay(result);
     previousOperation = operation;
+
+    return Number.isFinite(result);
+}
+
+
+function throwError() {
+    clearAll();
+    display.textContent = "ERROR";
+    currentState = states.ERROR;
 }
 
 
