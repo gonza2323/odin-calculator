@@ -1,7 +1,7 @@
 "use strict";
 
 
-const display = document.querySelector(".display"); 
+const display = document.querySelector(".display");
 const keypad = document.querySelector(".keypad");
 
 const actions = {
@@ -10,7 +10,7 @@ const actions = {
     "subtract": () => inputOperation(subtract),
     "multiply": () => inputOperation(multiply),
     "divide": () => inputOperation(divide),
-    "clear-all" : () => clearAll(),
+    "clear-all": () => clearAll(),
     "clear-entry": () => numericInput("clear-entry"),
     "add-decimal": () => numericInput("add-decimal"),
     "negate": () => numericInput("negate"),
@@ -29,12 +29,17 @@ const actions = {
 const keyboardControls = {
     "Enter": "equal",
     "Escape": "clear-all",
+    "r": "clear-all",
     "Backspace": "clear-entry",
+    "Delete": "clear-entry",
+    "c": "clear-entry",
     ".": "add-decimal",
+    ",": "add-decimal",
     "+": "add",
     "-": "subtract",
     "*": "multiply",
     "/": "divide",
+    "n": "negate",
 }
 
 const states = {
@@ -60,6 +65,7 @@ function clearAll() {
     clearEntry();
 }
 
+
 function numericInput(input) {
     switch (currentState) {
         case states.RESULT:
@@ -69,9 +75,9 @@ function numericInput(input) {
             clearEntry();
             break;
     }
-    
+
     currentState = states.INPUT_OPERAND;
-        
+
     switch (input) {
         case "clear-entry":
             clearEntry();
@@ -87,6 +93,7 @@ function numericInput(input) {
             return;
     }
 }
+
 
 function inputOperation(operation) {
     switch (currentState) {
@@ -109,6 +116,7 @@ function inputOperation(operation) {
     display.textContent += operation.symbol;
 }
 
+
 function equal() {
     switch (currentState) {
         case states.INPUT_OPERATION:
@@ -120,21 +128,23 @@ function equal() {
             const operation = currentOperation || previousOperation;
             if (operandB === null)
                 operandB = readNumberFromDisplay();
-        
+
             operate(operation);
             break;
     }
-        
+
     currentOperation = null;
     currentState = states.RESULT;
 }
 
+
 function operate(operation) {
     const result = operation(operandA, operandB);
     operandA = result;
-    writeNumberToDisplay(result); 
+    writeNumberToDisplay(result);
     previousOperation = operation;
 }
+
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
@@ -146,6 +156,7 @@ subtract.symbol = "−";
 multiply.symbol = "×";
 divide.symbol = "÷";
 
+
 function inputNumber(number) {
     if (display.textContent === "0" ||
         display.textContent === "-0"
@@ -156,10 +167,12 @@ function inputNumber(number) {
         display.textContent += number;
 }
 
+
 function inputDecimal() {
     if (!display.textContent.includes("."))
         display.textContent += ".";
 }
+
 
 function clearEntry() {
     display.textContent = "0";
@@ -170,9 +183,11 @@ function readNumberFromDisplay() {
     return parseFloat(display.textContent);
 }
 
+
 function writeNumberToDisplay(number) {
     display.textContent = number;
 }
+
 
 function inputPlusMinusSign() {
     if (display.textContent.startsWith("-"))
@@ -181,21 +196,24 @@ function inputPlusMinusSign() {
         display.textContent = "-" + display.textContent;
 }
 
+
 function performAction(actionName) {
     const action = actions[actionName];
     if (action) action();
 }
 
+
 function onButtonClick(event) {
     event.stopPropagation();
-    
+
     const action = event.target.dataset.action;
     performAction(action);
 }
 
+
 function onKeyPressDown(event) {
     event.stopPropagation();
-    
+
     const key = event.key;
 
     const action = keyboardControls[key] || key;
@@ -203,9 +221,10 @@ function onKeyPressDown(event) {
 
     const button = document.querySelector(`button[data-action="${action}"]`);
     if (button) button.classList.add("active");
-    
+
     if (key === '/') event.preventDefault();
 }
+
 
 function onKeyPressUp(event) {
     event.stopPropagation();
