@@ -134,6 +134,8 @@ function equal() {
             if (operandB === null)
                 operandB = readNumberFromDisplay();
 
+            if (!operation) break;
+
             const success = operate(operation);
             if (!success) return throwError();
 
